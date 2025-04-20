@@ -1,0 +1,50 @@
+<!-- templates/setup.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="p-4 bg-white shadow-sm rounded-3">
+        <h2 class="mb-4">Create your first user</h2>
+        {% if error %}
+          <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="post">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              class="form-control"
+              id="confirm_password"
+              name="confirm_password"
+              required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">
+            Create Account
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

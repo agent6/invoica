@@ -1,0 +1,75 @@
+<!-- templates/login.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid min-vh-100 d-flex align-items-center">
+  <div class="row w-100 justify-content-center">
+
+    <!-- ── Login column ─────────────────────────── -->
+    <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+      <div class="p-4 p-sm-5 bg-white shadow-sm"
+           style="border-radius:12px;">
+
+        <!-- Logo -->
+        <div class="text-center mb-4">
+          <img
+            src="{{ url_for('static', filename='logo.png') }}"
+            alt="Invoica logo"
+            style="height:128px;">
+        </div>
+
+        <h3 class="mb-3 text-center">
+          Log in to your account
+        </h3>
+
+
+        <!-- Flash error -->
+        {% if error %}
+          <div class="alert alert-danger py-2">
+            {{ error }}
+          </div>
+        {% endif %}
+
+        <!-- Login form -->
+        <form method="POST" action="{{ url_for('auth.login') }}">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required>
+          </div>
+
+          <div class="mb-4">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              required>
+          </div>
+
+          <button type="submit"
+                  class="btn btn-primary w-100">
+            Log in
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- ── Illustration (hidden on < md) ────────── -->
+    <div class="col-md-5 text-center d-none d-md-block">
+      <img
+        src="{{ url_for('static', filename='illustration.png') }}"
+        alt="Login illustration"
+        class="img-fluid">
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+<!-- templates/invoices.html -->
+{% extends "base.html" %}
+{% block content %}
+
+  <!-- ── Title + New‑invoice CTA ─────────────────────────────── -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+    <h1 class="mb-2 mb-md-0"
+        style="font-size:32px; font-weight:700; color:#2D2D2D;">
+      Invoices
+    </h1>
+    <a href="{{ url_for('invoices.create') }}"
+       class="btn btn-primary mt-2 mt-md-0">
+      New Invoice
+    </a>
+  </div>
+
+  <!-- ── Filters ──────────────────────────────────────────────── -->
+  <form method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+      <select name="client_id" class="form-select">
+        <option value="">All Clients</option>
+        {% for c in all_clients %}
+          <option value="{{ c.id }}"
+                  {% if selected_client==c.id %}selected{% endif %}>
+            {{ c.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-auto">
+      <select name="status" class="form-select">
+        <option value="">All Statuses</option>
+        {% for s in statuses %}
+          <option value="{{ s }}"
+                  {% if selected_status==s %}selected{% endif %}>
+            {{ s }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-outline-secondary">Filter</button>
+    </div>
+  </form>
+
+  <!-- ── Table ───────────────────────────────────────────────── -->
+  <div class="table-responsive bg-white shadow-sm mb-3" style="border-radius:12px;">
+    <table class="table mb-0 align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Invoice</th>
+          <th>Client</th>
+          <th>Status</th>
+          <th>Due Date</th>
+          <th class="text-end">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for inv in invoices %}
+        <tr>
+          <td>
+            <a href="{{ url_for('invoices.detail', invoice_id=inv.id) }}"
+               class="text-decoration-none">
+              #INV-{{ "%03d"|format(inv.id) }}
+            </a>
+          </td>
+          <td>{{ inv.client.name }}</td>
+          <td>
+            {% if inv.status=='Paid' %}
+              <span class="badge bg-success">Paid</span>
+            {% elif inv.status=='Overdue' %}
+              <span class="badge bg-danger">Overdue</span>
+            {% else %}
+              <span class="badge bg-secondary">{{ inv.status }}</span>
+            {% endif %}
+          </td>
+          <td>{{ inv.due_date }}</td>
+          <td class="text-end">${{ "%.2f"|format(inv.amount) }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="5" class="text-center py-4 text-muted">
+            No invoices found
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Pagination controls ─────────────────────────────────── -->
+  {% if pagination.pages > 1 %}
+    <nav aria-label="Invoices pagination">
+      <ul class="pagination">
+        <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+          <a class="page-link"
+             href="{{ url_for('invoices.list', page=pagination.prev_num,
+                              client_id=selected_client, status=selected_status) }}">
+            ← Prev
+          </a>
+        </li>
+
+        <li class="page-item disabled">
+          <span class="page-link">
+            Page {{ pagination.page }} of {{ pagination.pages }}
+          </span>
+        </li>
+
+        <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+          <a class="page-link"
+             href="{{ url_for('invoices.list', page=pagination.next_num,
+                              client_id=selected_client, status=selected_status) }}">
+            Next →
+          </a>
+        </li>
+      </ul>
+    </nav>
+  {% endif %}
+
+{% endblock %}

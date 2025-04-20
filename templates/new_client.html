@@ -1,0 +1,40 @@
+<!-- templates/new_client.html -->
+{% extends "base.html" %}
+
+{% block content %}
+
+  <!-- ── Page title + Back button (wraps on mobile) ───────────── -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+    <h1 class="mb-2 mb-md-0"
+        style="font-size:32px; font-weight:700; color:var(--text);">
+      New Client
+    </h1>
+
+    <a href="{{ url_for('clients.list') }}"
+       class="btn btn-outline-secondary mt-2 mt-md-0">
+      ← Back to Clients
+    </a>
+  </div>
+
+  <!-- ── New‑client form ─────────────────────────────────────── -->
+  <form method="post"
+        class="bg-white p-4 p-sm-5 shadow-sm mx-auto"
+        style="border-radius:12px; max-width:600px;">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Client Name</label>
+      <input type="text"
+             id="name"
+             name="name"
+             class="form-control"
+             placeholder="Acme Corporation"
+             required>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary w-100 w-md-auto">
+      Create Client
+    </button>
+  </form>
+
+{% endblock %}

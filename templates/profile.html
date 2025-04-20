@@ -1,0 +1,60 @@
+<!-- templates/profile.html -->
+{% extends "base.html" %}
+{% block content %}
+
+  <!-- ── Page title ───────────────────────────────────────────── -->
+  <h1 class="mb-4"
+      style="font-size:32px; font-weight:700; color:var(--text);">
+    My Profile
+  </h1>
+
+  <!-- ── Profile form ─────────────────────────────────────────── -->
+  <form method="post"
+        action="{{ url_for('profile.view') }}"
+        class="bg-white p-4 p-sm-5 shadow-sm mx-auto"
+        style="border-radius:12px; max-width:600px;">
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email"
+             id="email"
+             name="email"
+             class="form-control"
+             value="{{ user.email }}"
+             required>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Password change -->
+    <h5 class="mb-3">
+      Change Password
+      <small class="text-muted">(optional)</small>
+    </h5>
+
+    <div class="mb-3">
+      <label for="new_password" class="form-label">New Password</label>
+      <input type="password"
+             id="new_password"
+             name="new_password"
+             class="form-control">
+    </div>
+
+    <div class="mb-4">
+      <label for="confirm_password" class="form-label">
+        Confirm Password
+      </label>
+      <input type="password"
+             id="confirm_password"
+             name="confirm_password"
+             class="form-control">
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary w-100 w-md-auto">
+      Save Changes
+    </button>
+  </form>
+
+{% endblock %}

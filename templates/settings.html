@@ -1,0 +1,121 @@
+<!-- templates/settings.html -->
+{% extends "base.html" %}
+
+{% block content %}
+
+  <!-- ── Page title ───────────────────────────────────────────── -->
+  <h1 class="mb-4"
+      style="font-size:32px; font-weight:700; color:var(--text);">
+    Settings
+  </h1>
+
+  <!-- ────────────────────────────────────────────────────────────
+       Account & Business Info
+  ------------------------------------------------------------------>
+  <section class="bg-white shadow-sm p-4 p-sm-5 mb-5"
+           style="border-radius:12px;">
+    <h2 class="h4 fw-bold mb-3">Account&nbsp;&amp;&nbsp;Business&nbsp;Info</h2>
+
+    <form method="post"
+          action="{{ url_for('settings.view') }}"
+          enctype="multipart/form-data"
+          class="row g-3 g-sm-4">
+      <input type="hidden" name="section" value="business">
+
+      <div class="col-12">
+        <label for="company_name" class="form-label">Company Name</label>
+        <input type="text"
+               id="company_name"
+               name="company_name"
+               class="form-control"
+               placeholder="Your Company, LLC"
+               value="{{ settings.company_name or '' }}">
+      </div>
+
+      <div class="col-12">
+        <label for="company_address" class="form-label">Address</label>
+        <input type="text"
+               id="company_address"
+               name="company_address"
+               class="form-control"
+               placeholder="123 Main St, City, Country"
+               value="{{ settings.company_address or '' }}">
+      </div>
+
+      <div class="col-12">
+        <label for="company_logo" class="form-label">Logo</label>
+        <input type="file"
+               id="company_logo"
+               name="company_logo"
+               class="form-control">
+      </div>
+
+      <div class="col-12">
+        <button type="submit"
+                class="btn btn-primary w-100 w-md-auto">
+          Save Business Info
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ────────────────────────────────────────────────────────────
+       Invoice Settings
+  ------------------------------------------------------------------>
+  <section class="bg-white shadow-sm p-4 p-sm-5"
+           style="border-radius:12px;">
+    <h2 class="h4 fw-bold mb-3">Invoice Settings</h2>
+
+    <form method="post"
+          action="{{ url_for('settings.view') }}"
+          class="row g-3 g-sm-4">
+      <input type="hidden" name="section" value="invoice">
+
+      <div class="col-12 col-md-6">
+        <label for="invoice_prefix" class="form-label">Invoice Prefix</label>
+        <input type="text"
+               id="invoice_prefix"
+               name="invoice_prefix"
+               class="form-control"
+               placeholder="INV-"
+               value="{{ settings.invoice_prefix or 'INV-' }}">
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label for="next_number" class="form-label">Next Invoice Number</label>
+        <input type="number"
+               id="next_number"
+               name="next_number"
+               class="form-control"
+               value="{{ settings.next_number or 1 }}"
+               min="1">
+      </div>
+
+      <div class="col-12">
+        <label for="default_notes" class="form-label">Default Notes</label>
+        <textarea id="default_notes"
+                  name="default_notes"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Thank you for your business!">{{ settings.default_notes or '' }}</textarea>
+      </div>
+
+      <div class="col-12">
+        <label for="default_terms" class="form-label">Default Terms</label>
+        <textarea id="default_terms"
+                  name="default_terms"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Payment due within 30 days.">{{ settings.default_terms or '' }}</textarea>
+      </div>
+
+      <div class="col-12">
+        <button type="submit"
+                class="btn btn-primary w-100 w-md-auto">
+          Save Invoice Settings
+        </button>
+      </div>
+    </form>
+  </section>
+
+{% endblock %}

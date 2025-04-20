@@ -1,0 +1,40 @@
+<!-- templates/_sidebar.html -->
+<aside class="sidebar">
+
+  <!-- Logo -->
+  <div class="logo flex-shrink-0">
+    <img
+      src="{% if current_user and current_user.dark_mode %}
+               {{ url_for('static', filename='logo_dm.png') }}
+           {% else %}
+               {{ url_for('static', filename='logo.png') }}
+           {% endif %}"
+      alt="Invoica logo"
+    />
+  </div>
+
+  <!-- Nav links -->
+  <div class="list-group list-group-flush d-flex flex-row flex-md-column w-100 px-2 px-md-3">
+
+    <a href="{{ url_for('dashboard.view') }}"
+       class="list-group-item list-group-item-action{% if request.endpoint == 'dashboard.view' %} active{% endif %}">
+      Dashboard
+    </a>
+
+    <a href="{{ url_for('invoices.list') }}"
+       class="list-group-item list-group-item-action{% if request.endpoint.startswith('invoices.') %} active{% endif %}">
+      Invoices
+    </a>
+
+    <a href="{{ url_for('clients.list') }}"
+       class="list-group-item list-group-item-action{% if request.endpoint.startswith('clients.') %} active{% endif %}">
+      Clients
+    </a>
+
+    <a href="{{ url_for('settings.view') }}"
+       class="list-group-item list-group-item-action{% if request.endpoint == 'settings.view' %} active{% endif %}">
+      Settings
+    </a>
+
+  </div>
+</aside>

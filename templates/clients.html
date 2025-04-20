@@ -1,0 +1,53 @@
+<!-- templates/clients.html -->
+{% extends "base.html" %}
+
+{% block content %}
+
+  <!-- ── Page title + New‑Client CTA ─────────────────────────── -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+    <h1 class="mb-2 mb-md-0"
+        style="font-size:32px; font-weight:700; color:#2D2D2D;">
+      Clients
+    </h1>
+
+    <a href="{{ url_for('clients.create') }}"
+       class="btn btn-primary mt-2 mt-md-0">
+      New Client
+    </a>
+  </div>
+
+  <!-- ── Clients table (scrolls horizontally on small screens) ── -->
+  <div class="table-responsive bg-white shadow-sm"
+       style="border-radius:12px;">
+    <table class="table mb-0 align-middle">
+      <thead class="table-light">
+        <tr>
+          <th scope="col" class="py-3">Client</th>
+          <th scope="col" class="py-3">Invoices</th>
+          <th scope="col" class="py-3 text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in clients %}
+          <tr>
+            <td>{{ client.name }}</td>
+            <td>{{ client.invoices|length }}</td>
+            <td class="text-end">
+              <a href="{{ url_for('clients.detail', client_id=client.id) }}"
+                 class="btn btn-sm btn-outline-primary">
+                View
+              </a>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="3" class="text-center py-4 text-muted">
+              No clients yet
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}
