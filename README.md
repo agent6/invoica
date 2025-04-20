@@ -2,13 +2,11 @@
 
 A simple CRM and invoicing web app
 
----
 
 # Description
 
 Invoica helps you manage clients, create invoices with line items, and export professional PDFs.
 
----
 
 # How to get it on your computer
 
@@ -28,7 +26,6 @@ Invoica helps you manage clients, create invoices with line items, and export pr
    pip install -r requirements.txt
    ```
 
----
 
 # How to run it
 

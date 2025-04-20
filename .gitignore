@@ -1,64 +1,18 @@
-# Byte-compiled / optimized / DLL files
+# Byte‑compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
-# Virtual environments
-venv/
-.env/
-env/
-.venv/
-
 # SQLite database
-*.db
-*.sqlite3
 invoica.db
 
-# Environment variables file
+# Environment
+venv/
 .env
-.env.*
 
-# Editor directories and files
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
+# IDE files
+*.idea/
+*.vscode/
 
-# macOS
-.DS_Store
-
-# Logs and reports
-*.log
-*.out
-*.err
-
-# Coverage and test caches
-.coverage
-htmlcov/
-.pytest_cache/
-
-# Distribution / packaging
-build/
-dist/
-*.egg-info/
-.eggs/
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage
-.tox/
-
-# PyInstaller
-*.manifest
-*.spec
-
-# mypy
-.mypy_cache/
-
-# Coverage
-coverage.xml
+# Ignore the seed script (contains credentials prompts)
+seed_user.py
