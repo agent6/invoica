@@ -12,7 +12,7 @@ Invoica helps you manage clients, create invoices with line items, and export pr
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/invoica.git
+   git clone https://github.com/agent6/invoica.git
    cd invoica
    ```
 2. Create and activate a virtual environment:
